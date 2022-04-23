@@ -5,7 +5,7 @@ Implement a distributed MapReduce system based on [Google's MapReduce paper in 2
 ## My Inplementation & Design Diagram:
 This MapReduce system consisting of 3 major partsss:
 
-![Design Diagram](./diagram.svg)
+![Design Diagram](./design.svg)
 
 
 # MapReduce functionality Example: (2 text files, nReduce = 2)
