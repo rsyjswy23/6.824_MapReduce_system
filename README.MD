@@ -11,7 +11,7 @@ This MapReduce system consisting of 3 major parts:
 ![Design Diagram](./design.svg)
 
 
-### MapReduce functionality Example: (2 text files, nReduce = 2)
+### MapReduce functionality example: (2 text files, nReduce = 2)
 
     file 1: Hello, my name is Sue, your name?
     file 2: Hello, your name is Tom.
