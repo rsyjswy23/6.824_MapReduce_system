@@ -1,8 +1,11 @@
+This is lab work of MIT 6.824 Distributed Systems
+
 # GOAL:
 Implement a distributed MapReduce system based on [Google's MapReduce paper in 2004.](http://static.googleusercontent.com/media/research.google.com/en//archive/mapreduce-osdi04.pdf)
 
 
-# Inplementation & Design Diagram:
+# My Design Diagram:
+
 This MapReduce system consisting of 3 major parts:
 
 ![Design Diagram](./design.svg)
@@ -56,14 +59,14 @@ This MapReduce system consisting of 3 major parts:
 3. Use switch--case to simplify RequestJob() logic.
 
 4. The coordinator can’t reliably distinguish between crashed workers, workers that are alive but have stalled for some reason, and workers that are executing but too slowly to be useful. In the paper, chapter 3.6: 
-    <i>"We have a general mechanism to alleviate the problem of stragglers. When a MapReduce operation is close to completion, the master schedules backup executions of the remaining in-progress tasks. The task is marked as completed whenever either the primary or the backup execution completes. We have tuned this mechanism so that it typically increases the computational resources
+        <p><i>"We have a general mechanism to alleviate the problem of stragglers. When a MapReduce operation is close to completion, the master schedules backup executions of the remaining in-progress tasks. The task is marked as completed whenever either the primary or the backup execution completes. We have tuned this mechanism so that it typically increases the computational resources
     used by the operation by no more than a few percent. We have found that this significantly reduces the time to complete large MapReduce operations. As an example, the sort program described in Section 5.3 takes 44%
     longer to complete when the backup task mechanism is
-    disabled." </i>
+    disabled." </i> </p>
 
     One possible solution is to have the workers send hearbeat and task completion status to Coordinator, so Coordinator can resend this task to other worker when this task is close to completion. 
 
-    Optimization: To simplified the design, I added an attribute Deadline(10s after it sends to worker) of each task. When coordinator executes go routine to iterate every task and pass unassigned task to the ToDoTask channel, if the current task has not been completed by Deadline, then will mark this task uncomplete, pass it to ToDoTask channel, and wait for re-assginment to any work again.
+    Optimization: To simplified the design, I added an attribute Deadline(10s after it sends to worker) of each task. When coordinator iterates every task and pass unassigned task to the ToDoTask channel, if the assigned task has not been completed by Deadline, then will mark this task uncomplete, pass it to ToDoTask channel, and wait for re-assginment to other worker again.
 
 
 ## Notes & Highlight:
