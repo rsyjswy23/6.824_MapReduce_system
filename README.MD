@@ -41,12 +41,13 @@ The flow of execution when the MapReduce function is called: (2 text files, nRed
     {"Hello",[1,1]},{"my",[1]},{"name",[1,1,1]},{"is", [1,1]} ---> reduce machine 1
     {"Sue", 1}, {"your", [1,1]}, {"Tom", 1}                 ---> reduce machine 2
 
-    After perform Reduce():
+    After perform Reduce() & sort key in increasing order:
     reduce machine 1 ouput: 
     Hello 2
+    is    2
     my    1
     name  3
-    is    2
+   
     reduce machine 2 ouput: 
     Sue   1
     Tom   1
