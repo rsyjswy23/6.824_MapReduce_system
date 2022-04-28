@@ -115,13 +115,15 @@ The flow of execution when the MapReduce function is called: (2 text files, nRed
     -  If the Coordinator fails, the implementation simply aborts the whole execution and will retry from the start again.
     -  An alternative idea is to have the Coordinator periodically checkpoint its state, so that a retry could pick up from where the execution left off.
 
-### Final Thoughts:
+## Final Thoughts:
 
 I learned a lot from this lab and I really enjoy learning every single piece of new knowledge from it. 
 
 I tried hard to stick closely to the details and spec given in the MapReduce paper, but after doing a code review with others, I realized that the design and the code can be cleaner if I don't strictly follow it, or I should be more flexible about following it. 
 
 For example, when dealing with Workers failures, instead of having Workers send heartbeat and completion status to Coordinator, and let the Coordinator to decide if this Worker is a failure and need to re-assign the task to others, I can simplify it by creating a seperate Goroutine on Coordinator to check if task is completed by deadline(startTime + 10s). If not, pass this uncompleted task to ToDoTask channel and re-assign later. 
+
+MapReduce is no longer in use at Google now, but it fundamentally changed the way of large scale data processing architecture. It abstracted the complexity of dealing with parallelism, fault-tolerance and load balancing by exposing a simple API that allowed programmers without experience with these systems to distribute the processing of large datasets across a cluster of computers.
 
 ## Notes & Highlight:
 Go, concurrent programming, parallelism, mutual exclusions(mutexes), channel, RPC, [Go’s net/rpc package](https://ops.tips/gists/example-go-rpc-client-and-server/), thread, process, MapReduce...
