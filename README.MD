@@ -1,4 +1,4 @@
-This is part of my self-study of MIT 6.824 Distributed Systems on lab 1 MapReduce. 
+This is part of my self-study of MIT 6.824 Distributed Systems on lab 1 MapReduce. Since the course doesn't recommend posting course materials, I only post my own solution. 
 
 # About this repo:
 
