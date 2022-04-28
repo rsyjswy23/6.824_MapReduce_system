@@ -51,6 +51,8 @@ The flow of execution when the MapReduce function is called: (2 text files, nRed
     Sue   1
     Tom   1
     your  2
+    
+![overview from paper](./overview.jpg)
 
 ### Details about the flow of MapReduce: 
 - The Coordinator splits the input into X files(each size 16~64 MB) and pass them to the ToDoTask channel and wait for the Worker's rpc to request tasks.
