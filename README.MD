@@ -4,7 +4,7 @@ This is part of my self-study of MIT 6.824 Distributed Systems on lab 1 MapReduc
 
 Implement a distributed MapReduce system with Go, based on [Google's MapReduce paper in 2004.](http://static.googleusercontent.com/media/research.google.com/en//archive/mapreduce-osdi04.pdf)
 
-### There are 2 majors differences: 
+### There are 2 major differences: 
 
 1. In a real system the Workers would run on a bunch of different machines, but for this lab you'll run them all on a single machine.
 2. On the MapReduce paper describes the Coordinator pushing tasks to Workers, but for this lab, we were told to have Workers call the Coordinator using remote procedure calls (RPCs) to ask for tasks instead.
