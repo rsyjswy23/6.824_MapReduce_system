@@ -71,7 +71,7 @@ The flow of execution when the MapReduce function is called: (2 text files, nRed
 
 ### Details about the mechanisms between Coordinator and Workers: 
 
-- mrcoordinator file calls the MakeCoordinator function of the Coordinator struct to create the Coordinator node. Then I send each file to ToDoTask channel with filename and its index. Channel is used for concurrent programming with Go.
+- mrcoordinator file calls the MakeCoordinator function of the Coordinator struct to create the Coordinator node. Then it send each file to ToDoTask channel with filename and its index. Channel is used for concurrent programming with Go.
 
 - mrworker file creates multiple Workers instances that work in parallel and send RPC call to request task from Coordinator.
 
@@ -95,7 +95,7 @@ The flow of execution when the MapReduce function is called: (2 text files, nRed
 
 #### 2. About atomic write:
 
-- To ensure that nobody observes partially written files in the presence of crashes, the MapReduce paper mentions the trick of using a temporary file and atomically renaming it once it is completely written. Use ioutil.TempFile to create a temporary file and os.Rename to atomically rename it. In the paper, when a task is completed, both Worker and Coordinator can write the final output files, and synchronization bugs occured.
+- To ensure that nobody observes partially written files in the presence of crashes, the MapReduce paper mentions the trick of using a temporary file and atomically renaming it once it is completely written. Use ioutil.TempFile to create a temporary file and os.Rename to atomically rename it. In the paper, when a task is completed, both Worker and Coordinator can write the final output files, and synchronization bugs occured because same file being rewrite and rename repeatedly. 
 
     Optimization: To simplify the design, minimize numbers of RPC calls and decouple the write and commit process, I only allow coordinator to commit when the Coordinator receive a 'task is completed' signal from Worker.
 
