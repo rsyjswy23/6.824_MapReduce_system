@@ -22,12 +22,11 @@ The MapReduce system can be implemented in many ways, but this implementation is
 ### What is MapReduce? 
 MapReduce is a system for parallelizing the computation of a large volume of data across multiple machines in a cluster. The Map task takes an input file and outputs a set of intermediate (key, value) pairs. The intermediate values with the same key are then grouped together and processed in the Reduce task for each distinct key.
 
-The flow of execution when the MapReduce function is called: (2 text files, nReduce = 2)
+The flow of execution when the MapReduce function is called: (1 big text file, nReduce = 2)
 
-    file 1: Hello, my name is Sue, your name?
-    file 2: Hello, your name is Tom.
+    file: Hello, my name is Sue, your name? || Hello, your name is Tom. (split into 2 files)
 
-    After perform Map() on each file:
+    After perform Map() on each split:
 
     file 1: [{"Hello", 1}, {"my", 1}, {"name", 1}, {"is", 1}, {"Sue", 1}, {"your", 1}, {"name", 1}]
     file 2: [{"Hello", 1}, {"you", 1}, {"name", 1}, {"is", 1}, {"Tom", 1}]
