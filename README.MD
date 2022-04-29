@@ -93,7 +93,7 @@ The flow of execution when the MapReduce function is called: (1 big text file, n
 
 #### 1. About concurrency in Go:
 
-- The coordinator, as an RPC server, will be concurrent and need to use sync.Mutex to lock shared data(ToDoTask channel and Status map). Originally I applied the mutex lock very specifically, only when multiple Workers request tasks in parallel, because I wanted to avoid multiple threads waiting for the same mutex too often and that would result in performance worse than a single thread serving all requests. But since the race condition being dectected by Go Race detector, I applied the mutex to other functions on the Coordinator and everything on Coordinator will execute sequentially.
+- The coordinator, as an RPC server, will be concurrent and need to use sync.Mutex to lock shared data(ToDoTask channel and Status map). Originally I applied the mutex lock very specifically, only when multiple Workers request tasks in parallel, because I wanted to avoid multiple threads waiting for the same mutex too often and that would result in low performance. But since the race condition being dectected by Go Race detector, I applied the mutex to other functions on the Coordinator and everything on Coordinator will execute sequentially.
 
 #### 2. About atomic write:
 
