@@ -83,7 +83,7 @@ The flow of execution when the MapReduce function is called: (1 big text file, n
 
 - After all the Map tasks are completed, the Coordinator can switch to 'Reduce' mode and assign reduce tasks.
 
-- When a task is done, have the Worker send a 'task is completed' signal to Coordinator and let the Coordinator write the final ouput.
+- When a task is done, have the Worker send a 'task is completed' signal to Coordinator and let the Coordinator rename and commit the final ouput.
 
 ### Rules:
 
