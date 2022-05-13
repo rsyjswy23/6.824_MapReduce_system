@@ -122,6 +122,10 @@ I tried hard to stick closely to the details and spec given in the MapReduce pap
 
 For example, when dealing with Workers failures, instead of having Workers send heartbeat and completion status to Coordinator, and let the Coordinator to decide if this Worker is a failure and need to re-assign the task to others, I can simplify it by creating a seperate Goroutine on Coordinator to check if task is completed by deadline(startTime + 10s). If not, pass this uncompleted task to ToDoTask channel and re-assign later. 
 
+Another example is that the paper doesn't mention about the Worker send acknowledgement to Coordinator after task is done. I think having the Worker to send back a completion message to Coordinator would make implementation cleaner. 
+
+To debug the race condition, I learned to use Delve debugger. Even though I ended up making Coordinator to work in a sequential order to solve the race condition, logging out and tracking go routines with Delve solidified my understanding. 
+
 MapReduce is no longer in use at Google now, but it fundamentally changed the way of large scale data processing architecture. It abstracted the complexity of dealing with parallelism, fault-tolerance and load balancing by exposing a simple API that allowed programmers without experience with these systems to distribute the processing of large datasets across a cluster of computers.
 
 ## Notes & Highlight:
